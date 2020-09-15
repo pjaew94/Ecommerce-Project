@@ -10,7 +10,7 @@ app.use(express.json({ extended: false }))
 
 app.use('/api/users', require('./routes/api/users'))
 app.use('/api/auth', require('./routes/api/auth'))
-app.use('/api/post', require('./routes/api/post'))
+app.use('/api/posts', require('./routes/api/posts'))
 
 app.get('/', (req, res) => {
     return res.send('API running');

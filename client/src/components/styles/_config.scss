@@ -1,0 +1,15 @@
+@import url('https://fonts.googleapis.com/css2?family=Open+Sans:wght@400;700&family=Raleway:wght@300;500&display=swap');
+
+// Flex configs
+%center_flex {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+%space_between_flex {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+}
+

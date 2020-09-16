@@ -1,0 +1,49 @@
+@import 'config';
+
+.navbar {
+    @extend %center_flex;
+    height: 7vh;
+    width: 100%;
+    border-bottom-left-radius: 15px;
+    border-bottom-right-radius: 15px;
+    border: none;
+    box-shadow: 0 1px 15px -2px gray;
+
+    font-family: 'Raleway', sans-serif;
+
+    .navbar_content_wrapper {
+        @extend %space_between_flex;
+        height: 100%;
+        width: 80%;
+
+        .navbar_logo {
+            @extend %center_flex;
+
+
+            .hexagon {
+                font-size: 2rem;
+            }
+            
+            span {
+                font-size: 1.3rem;
+                font-weight: 500;
+                margin-left: 10px;
+            }
+        }
+
+        ul {
+            @extend %center_flex;
+            height: 100%;
+            list-style-type: none;
+
+            li {
+                @extend %center_flex;
+                height: 50%;
+                width: 100px;
+                margin-left: 15px;
+                cursor: pointer;
+            }
+        }
+    }
+    
+}

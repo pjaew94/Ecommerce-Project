@@ -1,4 +1,4 @@
-@import 'config';
+@import "config";
 
 .navbar {
     @extend %center_flex;
@@ -9,7 +9,11 @@
     border: none;
     box-shadow: 0 1px 15px -2px gray;
 
-    font-family: 'Raleway', sans-serif;
+    font-family: "Raleway", sans-serif;
+    -webkit-user-select: none; /* Safari */
+    -moz-user-select: none; /* Firefox */
+    -ms-user-select: none; /* IE10+/Edge */
+    user-select: none; /* Standard */
 
     .navbar_content_wrapper {
         @extend %space_between_flex;
@@ -19,11 +23,10 @@
         .navbar_logo {
             @extend %center_flex;
 
-
             .hexagon {
                 font-size: 2rem;
             }
-            
+
             span {
                 font-size: 1.3rem;
                 font-weight: 500;
@@ -45,5 +48,4 @@
             }
         }
     }
-    
 }

@@ -1,1 +1,54 @@
 @import 'config';
+
+
+.admin_register {
+    @extend %center_flex;
+    height: 100vh;
+    width: 100vw;
+
+    .container {
+        display: flex;
+        height: 70vh;
+        width: 65vw;
+        border-radius: 15px;
+        box-shadow: 0 1px 15px -10px rgb(148, 148, 148);
+
+        .form_container {
+            @extend %space_around_flex;
+            flex-direction: column;
+            height: 100%;
+            width: 50%;
+            border-top-left-radius: 15px;
+            border-bottom-left-radius: 15px;
+
+            .header {
+                font-family: 'Raleway', sans-serif;
+                font-weight: 300;
+                font-size: 2rem;
+                // margin-bottom: 50px;
+            }
+
+            .admin_form {
+                @extend %space_between_flex;
+                flex-direction: column;
+                height: 50%;
+                width: 50%;
+            }
+        }
+
+        .svg_container {
+            @extend %center_flex;
+            height: 100%;
+            width: 50%;
+            border-top-right-radius: 15px;
+            border-bottom-right-radius: 15px;
+            background: #ecfbfc;
+
+            img {
+                height: 60%;
+                width: auto;
+            }
+        }
+    }
+    
+}

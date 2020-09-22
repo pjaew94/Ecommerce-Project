@@ -18,6 +18,7 @@ const App = () => {
           {/* <Navbar /> */}
           <Route exact path="/dashboard" component={Dashboard} />
           <Route exact path='/adminregister' component={AdminRegister} />
+          <Route exact path='/login' component={Login} />
         </Switch>
       </Fragment>
     </Router>

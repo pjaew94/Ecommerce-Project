@@ -1,11 +1,16 @@
 import React, { useState } from "react";
+import { connect } from 'react-redux';
 import { Link, Redirect } from 'react-router-dom';
+import { setAlert } from '../../actions/alert'
+import { register } from '../../actions/auth'
+import PropTypes from 'prop-types'
+
 
 import "../styles/Register.scss";
 
 import registerSvg from "../../svgs/GirlSwing.svg";
 
-const AdminRegister = () => {
+const AdminRegister = ({ setAlert, register }) => {
   const [formData, setFormData] = useState({
     name: "",
     email: "",
@@ -22,9 +27,9 @@ const AdminRegister = () => {
   const onSubmit = async (e) => {
     e.preventDefault();
     if (password !== password2) {
-      console.log("Passwords do not match.");
+      setAlert("Please make sure your passwords are matching.", 'danger');
     } else {
-        console.log('Yuh')
+        register({ name, email, password, status })
     }
   };
 
@@ -102,4 +107,9 @@ const AdminRegister = () => {
   );
 };
 
-export default AdminRegister;
+AdminRegister.propTypes = {
+    setAlert: PropTypes.func.isRequired,
+    register: PropTypes.func.isRequired,
+}
+
+export default connect(null, { setAlert, register })(AdminRegister);

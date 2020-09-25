@@ -1,28 +1,48 @@
-import React from "react";
+import React, { Fragment } from "react";
 import { Link } from "react-router-dom";
+import { connect } from "react-redux";
+import PropTypes from "prop-types";
+import { logout } from "../../actions/auth";
 
 import { IconContext } from "react-icons";
 import { CgShapeHexagon } from "react-icons/cg";
 
 import "../styles/Navbar.scss";
 
-const Navbar = () => {
+const Navbar = ({ logout, auth: { isAuthenticated, loading, user } }) => {
   return (
-    <nav className="navbar">
-      <div className="navbar_content_wrapper">
-        <div className="navbar_logo">
-          <IconContext.Provider value={{ className: "hexagon" }}>
-            <CgShapeHexagon />
-          </IconContext.Provider>{" "}
-          <span>JLC Studies</span>
-        </div>
-        <ul>
-          <li><Link to='/dashboard'>Dashboard</Link></li>
-          <li><Link to='/login'>Logout</Link></li>
-        </ul>
-      </div>
-    </nav>
+    <Fragment>
+      {!loading & isAuthenticated ? (
+        <nav className="navbar">
+          <div className="navbar_content_wrapper">
+            <div className="navbar_logo">
+              <IconContext.Provider value={{ className: "hexagon" }}>
+                <CgShapeHexagon />
+              </IconContext.Provider>{" "}
+              <span>JLC Studies</span>
+            </div>
+            <ul>
+              <li>
+                <Link className='link' to="/dashboard">Dashboard</Link>
+              </li>
+              <li>
+                <a className='link' onClick={logout}>Logout</a>
+              </li>
+            </ul>
+          </div>
+        </nav>
+      ) : null}
+    </Fragment>
   );
 };
 
-export default Navbar;
+Navbar.propTypes = {
+  logout: PropTypes.func.isRequired,
+  auth: PropTypes.object.isRequired,
+};
+
+const mapStateToProps = (state) => ({
+  auth: state.auth,
+});
+
+export default connect(mapStateToProps, { logout })(Navbar);

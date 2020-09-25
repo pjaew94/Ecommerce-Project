@@ -37,7 +37,7 @@
             .admin_form {
                 @extend %center_flex;
                 flex-direction: column;
-                height: 60%;
+                height: 70%;
                 width: 70%;
                 .inner {
                     height: 80%;
@@ -81,9 +81,11 @@
                         }
                     }
 
-                    .select_container {
+                    .select_container,
+                    .subjects_container {
                         @extend %space_between_flex;
                         width: 100%;
+                        margin-bottom: 10px;
 
                         select {
                             font-family: "Open Sans", sans-serif;
@@ -110,6 +112,8 @@
                         }
                     }
                 }
+
+
 
                 .button {
                     font-family: "Raleway", sans-serif;

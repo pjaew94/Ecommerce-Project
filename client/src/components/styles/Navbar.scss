@@ -7,7 +7,7 @@
     border-bottom-left-radius: 15px;
     border-bottom-right-radius: 15px;
     border: none;
-    box-shadow: 0 1px 15px -2px gray;
+    box-shadow: 0 1px 15px -5px gray;
 
     font-family: "Raleway", sans-serif;
     -webkit-user-select: none; /* Safari */
@@ -39,11 +39,14 @@
             height: 100%;
             list-style-type: none;
 
+
             li {
                 @extend %center_flex;
                 height: 50%;
                 width: 100px;
                 margin-left: 15px;
+                text-decoration: none;
+    
                 cursor: pointer;
             }
         }

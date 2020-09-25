@@ -24,7 +24,7 @@ router.post(
       body("startTime", "Specify start time").not().isEmpty(),
       body("endTime", "Specify end time").not().isEmpty(),
       body("background", "Insert background").not().isEmpty(),
-      body("description", "Describe the subject").not().isEmpty(),
+      body("description", "Describe the subject").not().isEmpty()
     ],
   ],
   async (req, res) => {
@@ -45,6 +45,8 @@ router.post(
         endTime,
         background,
         description,
+        studentSubjects,
+        instructorSubjects
       } = req.body;
 
       if (admin === "Instructor") {
@@ -56,6 +58,9 @@ router.post(
           endTime: endTime,
           background: background,
           description: description,
+          block: block,
+          studentSubjects: studentSubjects,
+          instructorSubjects: instructorSubjects
         });
 
         const theSubject = await newSubject.save();

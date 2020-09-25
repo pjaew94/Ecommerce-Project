@@ -54,8 +54,8 @@ router.post(
 
       const payload = {
         user: {
-          id: user.id,
-        },
+          id: user.id
+        }
       };
 
       jwt.sign(
@@ -64,7 +64,7 @@ router.post(
         { expiresIn: 36000 },
         (err, token) => {
           if (err) throw err;
-          res.send(token);
+          res.send({token});
         }
       );
     } catch (err) {

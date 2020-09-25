@@ -26,6 +26,12 @@ const SubjectSchema = new Schema({
     type: String,
     required: true,
   },
+  studentSubjects: {
+    type: String,
+  },
+  instructorSubjects: {
+    type: String,
+  },
   description: {
     type: String,
     required: true,

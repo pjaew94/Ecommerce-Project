@@ -2,7 +2,7 @@ import React, { useState } from "react";
 import { Link, Redirect } from "react-router-dom";
 import { connect } from "react-redux";
 import PropTypes from "prop-types";
-// import { login } from '../../actions/auth';
+import { login } from '../../actions/auth';
 
 import "../styles/Login.scss";
 import sittingSvg from "../../svgs/Group 2.svg";
@@ -15,7 +15,7 @@ import blob4Svg from "../../svgs/blobs/Blob4.svg";
 import { IconContext } from "react-icons";
 import { CgShapeHexagon } from "react-icons/cg";
 
-const Login = () => {
+const Login = ({ login, isAuthenticated }) => {
   const [formData, setFormData] = useState({
     email: "",
     password: "",
@@ -28,11 +28,12 @@ const Login = () => {
 
   const onSubmit = async (e) => {
     e.preventDefault();
-    // login(email, password)
+    login(email, password)
   };
-  // if(isAuthenticated) {
-  //     return <Redirect to='/dashboard' />
-  // }
+
+  if(isAuthenticated) {
+      return <Redirect to='/dashboard' />
+  }
 
   return (
     <div className="login">
@@ -77,7 +78,7 @@ const Login = () => {
             </div>
           </div>
           <div className="button_container">
-            <input className="button" type="submit" value="Sign In" />
+            <input className="button" type="submit" value="Login" />
           </div>
         </form>
       </div>
@@ -85,4 +86,13 @@ const Login = () => {
   );
 };
 
-export default Login;
+Login.propTypes = {
+  login: PropTypes.func.isRequired,
+  isAuthenticated: PropTypes.bool.isRequired,
+}
+
+const mapStateToProps = state => ({
+  isAuthenticated: state.auth.isAuthenticated
+})
+
+export default connect(mapStateToProps, { login })(Login);

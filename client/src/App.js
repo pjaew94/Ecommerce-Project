@@ -11,7 +11,7 @@ import store from "./store";
 import Navbar from "./components/layout/Navbar";
 import Login from "./components/auth/Login";
 import AdminRegister from "./components/auth/AdminRegister";
-import RootRegister from "./components/auth/RootRegister";
+import StudentRegister from "./components/auth/StudentRegister";
 import Dashboard from "./components/layout/Dashboard";
 import Alert from './components/layout/Alert'
 
@@ -34,10 +34,12 @@ const App = () => {
         <Fragment>
           <Route exact path="/" component={Login} />
           <Alert />
+          <Navbar />
           <Switch>
-            {/* <Navbar /> */}
+  
             <Route exact path="/dashboard" component={Dashboard} />
             <Route exact path="/adminregister" component={AdminRegister} />
+            <Route exact path="/register" component={StudentRegister} />
             <Route exact path="/login" component={Login} />
           </Switch>
         </Fragment>

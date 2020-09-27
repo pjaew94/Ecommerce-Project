@@ -81,8 +81,7 @@
                         }
                     }
 
-                    .select_container,
-                    .subjects_container {
+                    .select_container {
                         @extend %space_between_flex;
                         width: 100%;
                         margin-bottom: 10px;

@@ -10,8 +10,7 @@ import store from "./store";
 
 import Navbar from "./components/layout/Navbar";
 import Login from "./components/auth/Login";
-import AdminRegister from "./components/auth/AdminRegister";
-import StudentRegister from "./components/auth/StudentRegister";
+import Register from "./components/auth/Register";
 import Dashboard from "./components/layout/Dashboard";
 import Alert from './components/layout/Alert'
 
@@ -26,7 +25,7 @@ const App = () => {
 
   useEffect(() => {
     store.dispatch(loadUser())
-  },[])
+  }, [])
 
   return (
     <Provider store={store}>
@@ -38,8 +37,7 @@ const App = () => {
           <Switch>
   
             <Route exact path="/dashboard" component={Dashboard} />
-            <Route exact path="/adminregister" component={AdminRegister} />
-            <Route exact path="/register" component={StudentRegister} />
+            <Route exact path="/register" component={Register} />
             <Route exact path="/login" component={Login} />
           </Switch>
         </Fragment>

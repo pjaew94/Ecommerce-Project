@@ -49,7 +49,7 @@ router.post(
         instructorSubjects
       } = req.body;
 
-      if (admin === "Instructor") {
+      if (admin === "Admin") {
         const newSubject = new Subjects({
           subject: subject,
           instructorFirst: instructorFirst,
@@ -58,7 +58,6 @@ router.post(
           endTime: endTime,
           background: background,
           description: description,
-          block: block,
           studentSubjects: studentSubjects,
           instructorSubjects: instructorSubjects
         });
@@ -89,5 +88,21 @@ router.get("/", auth, async (req, res) => {
   }
 });
 
+// Get specific subject
+router.get('/:id', auth, async (req, res ) => {
+  try {
+    const subject = await Subjects.findById(req.params.id);
+
+    if(!subject || !req.params.id.match(/^[0-9a-fA-F]{24}$/)) {
+      return res.status(404).json({ msg: 'Post not found' })
+    }
+
+    res.json(subject);
+
+  } catch (err) {
+    console.error(err.message);
+    res.status(500).send('Server Error')
+  }
+})
 
 module.exports = router;

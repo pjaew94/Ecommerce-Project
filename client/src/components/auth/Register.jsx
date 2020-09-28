@@ -1,16 +1,17 @@
 import React, { useState } from "react";
 import { connect } from "react-redux";
-import { Link } from "react-router-dom";
+import { Link, Redirect } from "react-router-dom";
 import { setAlert } from "../../actions/alert";
 import { loadUser } from "../../actions/auth";
 import PropTypes from "prop-types";
+import Spinner from '../layout/Spinner';
 
 import "../styles/Register.scss";
 
 import registerSvg from "../../svgs/GirlSwing.svg";
 import axios from "axios";
 
-const Register = ({ setAlert, user }) => {
+const Register = ({ setAlert, auth: { user, loading, isAuthenticated } }) => {
   const [formData, setFormData] = useState({
     name: "",
     email: "",
@@ -34,7 +35,6 @@ const Register = ({ setAlert, user }) => {
   // Change handler
   const onChange = (e) => {
     setFormData({ ...formData, [e.target.name]: e.target.value });
-    console.log(user.status);
   };
 
   // Register Instructor/Student
@@ -111,7 +111,13 @@ const Register = ({ setAlert, user }) => {
     </div>
   );
 
-  return (
+  if (!loading && user !== null) {
+    if(user.status !== "Admin" && isAuthenticated) {
+      return <Redirect to='dashboard' />
+    }
+  }
+
+  return loading && user === null ? (<Spinner />) :
     <div className="admin_register">
       <div className="container">
         <div className="form_container">
@@ -161,7 +167,8 @@ const Register = ({ setAlert, user }) => {
                 </div>
               </div>
 
-              {/* {user.status === "Admin" && statusSelector} */}
+              
+              {user !== null && user.status === "Admin" ? statusSelector: null}
               {formData.status === "Student" && studentSubjectsSelector}
               {formData.status === "Instructor" && instructorSubjectsSelector}
             </div>
@@ -180,17 +187,17 @@ const Register = ({ setAlert, user }) => {
         </div>
       </div>
     </div>
-  );
+  ;
 };
 
 Register.propTypes = {
   setAlert: PropTypes.func.isRequired,
   loadUser: PropTypes.func.isRequired,
-  user: PropTypes.object.isRequired,
+  auth: PropTypes.object.isRequired,
 };
 
 const mapStateToProps = (state) => ({
-  user: state.auth.user,
+  auth: state.auth,
 });
 
 export default connect(mapStateToProps, { setAlert, loadUser })(Register);

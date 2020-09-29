@@ -78,7 +78,7 @@ router.post(
 // @route    GET api/posts
 // @desc     Get all posts
 // @access   Private
-router.get("/", auth, async (req, res) => {
+router.get("/", async (req, res) => {
   try {
     const subjects = await Subjects.find().sort({ date: -1 });
     res.json(subjects);

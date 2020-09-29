@@ -164,6 +164,27 @@
                     }
                 }
             }
+
+            .route_to_register {
+                @extend %center_flex;
+                margin-top: 15px;
+                font-family: "Open Sans", sans-serif;
+                font-weight: 300;
+                font-size: 0.7rem;
+
+                .small_link {
+                    font-family: "Open Sans", sans-serif;
+                    font-weight: 300;
+                    font-size: 0.7rem;
+                    transition: 0.2s all ease-in;
+                    margin: 0 0.2rem;
+
+                    &:hover {
+                        color: #ffb2b2;
+                    }
+
+                }
+            }
         }
     }
 

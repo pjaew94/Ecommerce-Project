@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-import { Redirect } from "react-router-dom";
+import { Link, Redirect } from "react-router-dom";
 import { connect } from "react-redux";
 import PropTypes from "prop-types";
 import { login } from '../../actions/auth';
@@ -79,6 +79,11 @@ const Login = ({ login, isAuthenticated }) => {
           </div>
           <div className="button_container">
             <input className="button" type="submit" value="Login" />
+          </div>
+          <div className='route_to_register'>
+              Don't have an account? <Link className="small_link" to="/register">
+                Register
+              </Link> now!
           </div>
         </form>
       </div>

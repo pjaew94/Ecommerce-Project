@@ -26,7 +26,7 @@ export const getSpecificSubject = () => async dispatch => {
     }
 }
 
-export const getAllSubjects = () => async dispatch => {
+export const getAllSubjects = (user) => async dispatch => {
     try {
         const res = await axios.get('/api/subjects');
 
@@ -34,11 +34,11 @@ export const getAllSubjects = () => async dispatch => {
             type: GET_SUBJECTS,
             payload: res.data
         })
-        
+
     } catch (err) {
         dispatch({
             type: SUBJECT_ERROR,
-            payload: { msg: err.reponse.statusText, status: err.response.status }
+            payload: { msg: err.response.statusText, status: err.response.status }
         })       
     }
 }

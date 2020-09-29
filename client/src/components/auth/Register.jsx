@@ -2,26 +2,31 @@ import React, { useState } from "react";
 import { connect } from "react-redux";
 import { Link, Redirect } from "react-router-dom";
 import { setAlert } from "../../actions/alert";
-import { loadUser } from "../../actions/auth";
+import { loadUser, register } from "../../actions/auth";
 import PropTypes from "prop-types";
-import Spinner from '../layout/Spinner';
+import Spinner from "../layout/Spinner";
 
 import "../styles/Register.scss";
 
 import registerSvg from "../../svgs/GirlSwing.svg";
 import axios from "axios";
 
-const Register = ({ setAlert, auth: { user, loading, isAuthenticated } }) => {
+const Register = ({
+  setAlert,
+  register,
+  auth: { user, loading, isAuthenticated },
+}) => {
   const [formData, setFormData] = useState({
     name: "",
     email: "",
     password: "",
     password2: "",
-    status: "Student",
+    status: "",
     studentSubjects: "",
     instructorSubjects: "",
   });
 
+  // Destructure state
   const {
     name,
     email,
@@ -41,29 +46,50 @@ const Register = ({ setAlert, auth: { user, loading, isAuthenticated } }) => {
   const onSubmit = async (e) => {
     e.preventDefault();
     if (password !== password2) {
-      setAlert("Please make sure your passwords are matching.", "danger");
+      setAlert("Please make sure your passwords are matching.", "danger", 2000);
+    } else if (!status) {
+      setAlert(
+        "Please select status of user you are signing up for.",
+        "danger",
+        2000
+      );
     } else {
-      const config = {
-        headers: {
-          "Content-Type": "application/json",
-        },
-      };
+      if (user && user.status === "Admin") {
+        const config = {
+          headers: {
+            "Content-Type": "application/json",
+          },
+        };
 
-      const body = JSON.stringify({
-        name,
-        email,
-        password,
-        status,
-        studentSubjects,
-        instructorSubjects,
-      });
+        const body = JSON.stringify({
+          name,
+          email,
+          password,
+          status,
+          studentSubjects,
+          instructorSubjects,
+        });
 
-      try {
-        await axios.post("/api/users", body, config);
-      } catch (err) {
-        console.error(err.message);
+        try {
+          await axios.post("/api/users", body, config);
+
+          setAlert("User successfully registered.", "green", 3000);
+        } catch (err) {
+          console.error(err.message);
+        }
+        // register({ name, email, password, status });
+      } else {
+        const status = "Student";
+
+        register({
+          name,
+          email,
+          password,
+          status,
+          studentSubjects,
+          instructorSubjects,
+        });
       }
-      // register({ name, email, password, status });
     }
   };
 
@@ -75,7 +101,11 @@ const Register = ({ setAlert, auth: { user, loading, isAuthenticated } }) => {
         name="status"
         default="Student"
         onChange={(e) => onChange(e)}
+        defaultValue=""
       >
+        <option disabled={true} value="">
+          Student or Teacher?
+        </option>
         <option value="Student">Student</option>
         <option value="Instructor">Instructor</option>
       </select>
@@ -90,7 +120,11 @@ const Register = ({ setAlert, auth: { user, loading, isAuthenticated } }) => {
         value={studentSubjects}
         name="studentSubjects"
         onChange={(e) => onChange(e)}
+        defaultValue=""
       >
+        <option disabled={true} value="">
+          Select your courses
+        </option>
         <option value="sat">SAT Classes</option>
         <option value="pbC">PreAlg & Book Club</option>
         <option value="abC">Algebra & Book Club</option>
@@ -103,7 +137,11 @@ const Register = ({ setAlert, auth: { user, loading, isAuthenticated } }) => {
         value={instructorSubjects}
         name="instructorSubjects"
         onChange={(e) => onChange(e)}
+        defaultValue=""
       >
+        <option disabled={true} value="">
+          Select your subjects
+        </option>
         <option value="math">Math</option>
         <option value="bookClub">Book Club</option>
         <option value="english">SAT English</option>
@@ -111,13 +149,18 @@ const Register = ({ setAlert, auth: { user, loading, isAuthenticated } }) => {
     </div>
   );
 
+  // Conditions to load register page
   if (!loading && user !== null) {
-    if(user.status !== "Admin" && isAuthenticated) {
-      return <Redirect to='dashboard' />
+    if (user.status !== "Admin" && isAuthenticated) {
+      return <Redirect to="/dashboard" />;
+    } else if (!isAuthenticated) {
+      return <Redirect to="/login" />;
     }
   }
 
-  return loading && user === null ? (<Spinner />) :
+  return loading && user === null ? (
+    <Spinner />
+  ) : (
     <div className="admin_register">
       <div className="container">
         <div className="form_container">
@@ -166,10 +209,12 @@ const Register = ({ setAlert, auth: { user, loading, isAuthenticated } }) => {
                   />
                 </div>
               </div>
-
-              
-              {user !== null && user.status === "Admin" ? statusSelector: null}
-              {formData.status === "Student" && studentSubjectsSelector}
+              {user !== null && user.status === "Admin" && isAuthenticated
+                ? statusSelector
+                : null}
+              {formData.status === "Student" || !isAuthenticated
+                ? studentSubjectsSelector
+                : null}
               {formData.status === "Instructor" && instructorSubjectsSelector}
             </div>
             <input className="button" type="submit" value="Register" />
@@ -187,12 +232,13 @@ const Register = ({ setAlert, auth: { user, loading, isAuthenticated } }) => {
         </div>
       </div>
     </div>
-  ;
+  );
 };
 
 Register.propTypes = {
   setAlert: PropTypes.func.isRequired,
   loadUser: PropTypes.func.isRequired,
+  register: PropTypes.func.isRequired,
   auth: PropTypes.object.isRequired,
 };
 
@@ -200,4 +246,6 @@ const mapStateToProps = (state) => ({
   auth: state.auth,
 });
 
-export default connect(mapStateToProps, { setAlert, loadUser })(Register);
+export default connect(mapStateToProps, { setAlert, loadUser, register })(
+  Register
+);

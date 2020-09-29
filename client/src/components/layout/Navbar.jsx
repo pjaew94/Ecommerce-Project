@@ -22,11 +22,22 @@ const Navbar = ({ logout, auth: { isAuthenticated, loading, user } }) => {
               <span>JLC Studies</span>
             </div>
             <ul>
+              {!loading && user !== null && user.status === "Admin" ? (
+                <li>
+                  <Link className="link" to="/register">
+                    Register New
+                  </Link>
+                </li>
+              ) : null}
               <li>
-                <Link className='link' to="/dashboard">Dashboard</Link>
+                <Link className="link" to="/dashboard">
+                  Dashboard
+                </Link>
               </li>
               <li>
-                <a className='link' onClick={logout}>Logout</a>
+                <a className="link" href="/" onClick={logout}>
+                  Logout
+                </a>
               </li>
             </ul>
           </div>

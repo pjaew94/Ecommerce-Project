@@ -74,7 +74,7 @@ router.post(
     }
   }
 );
-
+0
 // @route    GET api/posts
 // @desc     Get all posts
 // @access   Private

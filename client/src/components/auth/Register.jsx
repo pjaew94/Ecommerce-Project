@@ -47,12 +47,6 @@ const Register = ({
     e.preventDefault();
     if (password !== password2) {
       setAlert("Please make sure your passwords are matching.", "danger", 2000);
-    } else if (!status) {
-      setAlert(
-        "Please select status of user you are signing up for.",
-        "danger",
-        2000
-      );
     } else {
       if (user && user.status === "Admin") {
         const config = {
@@ -79,6 +73,7 @@ const Register = ({
         }
         // register({ name, email, password, status });
       } else {
+
         const status = "Student";
 
         register({

@@ -6,14 +6,24 @@ import { logout } from "../../actions/auth";
 
 import { IconContext } from "react-icons";
 import { CgShapeHexagon } from "react-icons/cg";
-import { AiOutlineUser, AiOutlineBuild, AiOutlineSolution, AiOutlineLogout } from "react-icons/ai";
+import {
+  AiOutlineUser,
+  AiOutlineBuild,
+  AiOutlineSolution,
+  AiOutlineLogout,
+} from "react-icons/ai";
 
 import "../styles/Navbar.scss";
 import courage from "../../svgs/courage.jpg";
 
 const Navbar = ({ logout, auth: { isAuthenticated, loading, user } }) => {
-
   const [showLogout, setShowLogout] = useState(false);
+
+  const [navState, setNavState] = useState('courses');
+
+  const setNav = (e) => {
+    setNavState(e.target.name);
+  };
 
   return (
     <Fragment>
@@ -28,7 +38,12 @@ const Navbar = ({ logout, auth: { isAuthenticated, loading, user } }) => {
 
           <ul>
             <li>
-              <Link className="link" to="/profile">
+              <Link
+                className={`link ${navState === 'profile' ? 'selected' : null}`}
+                to="/profile"
+                name="profile"
+                onClick={setNav}
+              >
                 <IconContext.Provider value={{ className: "icon" }}>
                   <AiOutlineUser />
                 </IconContext.Provider>
@@ -36,7 +51,12 @@ const Navbar = ({ logout, auth: { isAuthenticated, loading, user } }) => {
               </Link>
             </li>
             <li>
-              <Link className="link" to="/dashboard">
+              <Link
+                className={`link ${navState === 'courses' ? 'selected' : null}`}
+                to="/dashboard"
+                name="courses"
+                onClick={setNav}
+              >
                 <IconContext.Provider value={{ className: "icon" }}>
                   <AiOutlineBuild />
                 </IconContext.Provider>
@@ -44,7 +64,12 @@ const Navbar = ({ logout, auth: { isAuthenticated, loading, user } }) => {
               </Link>
             </li>
             <li>
-              <Link className="link" to="/teachers">
+              <Link
+                className={`link ${navState === 'teachers' ? 'selected' : null}`}
+                to="/teachers"
+                name="teachers"
+                onClick={setNav}
+              >
                 <IconContext.Provider value={{ className: "icon" }}>
                   <AiOutlineSolution />
                 </IconContext.Provider>
@@ -53,14 +78,23 @@ const Navbar = ({ logout, auth: { isAuthenticated, loading, user } }) => {
             </li>
             {!loading && user !== null && user.status === "Admin" ? (
               <li>
-                <Link className="link" to="/register">
+                <Link
+                  className={`link ${navState === 'registerNew' ? 'selected' : null}`}
+                  to="/register"
+                  name="registerNew"
+                  onClick={setNav}
+                >
                   Register New
                 </Link>
               </li>
             ) : null}
           </ul>
 
-          <div className="user" onMouseEnter={() => setShowLogout(!showLogout)} onMouseLeave={() => setShowLogout(!showLogout)}>
+          <div
+            className="user"
+            onMouseEnter={() => setShowLogout(!showLogout)}
+            onMouseLeave={() => setShowLogout(!showLogout)}
+          >
             <div className={showLogout ? "show_logout" : "hide_logout"}>
               <a className="link" href="/" onClick={logout}>
                 Log Out
@@ -72,8 +106,8 @@ const Navbar = ({ logout, auth: { isAuthenticated, loading, user } }) => {
             <div className="user_block">
               <img src={courage} alt="profile picture"></img>
               <div className="user_info">
-                {user.name}
-                <span>{user.status}</span>
+                {user && user.name}
+                <span>{user && user.status}</span>
               </div>
             </div>
           </div>

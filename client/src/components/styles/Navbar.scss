@@ -12,7 +12,7 @@
     top: 0;
     left: 0;
 
-    @extend %main_medium;
+
     -webkit-user-select: none; /* Safari */
     -moz-user-select: none; /* Firefox */
     -ms-user-select: none; /* IE10+/Edge */
@@ -20,9 +20,11 @@
 
     .navbar_logo {
         display: flex;
+        @extend %main_medium;
 
         .hexagon {
             font-size: 2rem;
+            color: #B1CCC8;
         }
 
         span {
@@ -40,6 +42,7 @@
         transform: translateY(-170px);
 
         li {
+            @extend %minor_small;
             display: flex;
             flex-direction: column;
             justify-content: center;
@@ -65,6 +68,10 @@
                     color: black;
                 }
             }
+
+            .selected {
+                color: black;
+            }
         }
     }
 
@@ -77,6 +84,7 @@
         .show_logout,
         .hide_logout {
             @extend %center_flex;
+           
             height: 30px;
             width: 120px;
             transition: 0.3s all ease-in;
@@ -85,7 +93,9 @@
             left: 35%;
             z-index: 1;
             a {
+                @extend %minor_small;
                 transition: 0.3s all ease-in;
+                font-size: 1rem;
                 color: $gray_text;
 
                 &:hover {
@@ -116,7 +126,7 @@
             z-index: 2;
 
             &:hover {
-                box-shadow: 0 1px 15px -5px rgb(148, 148, 148);
+                @extend %box_shadow;
             }
 
             img {
@@ -131,7 +141,7 @@
                 display: flex;
                 justify-content: center;
                 flex-direction: column;
-                @extend %main_medium;
+                @extend %minor_small;
                 font-size: 0.8rem;
                 font-weight: 700;
 

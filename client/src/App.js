@@ -9,6 +9,7 @@ import store from "./store";
 
 
 import Navbar from "./components/layout/Navbar";
+import Recommendations from "./components/layout/Recommendations";
 import Login from "./components/auth/Login";
 import Register from "./components/auth/Register";
 import Dashboard from "./components/layout/Dashboard";
@@ -35,9 +36,10 @@ const App = () => {
           <Route exact path="/" component={Login} />
           <Alert />
           <Navbar />
+          <Recommendations />
           <Switch>
   
-            <PrivateRoute exact path="/dashboard" component={Dashboard} />
+            {/* <PrivateRoute exact path="/dashboard" component={Dashboard} /> */}
             <Route exact path="/register" component={Register} />
             <Route exact path="/login" component={Login} />
           </Switch>

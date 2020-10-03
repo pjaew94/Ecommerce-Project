@@ -51,12 +51,12 @@
                 width: 80%;
 
                 li {
-                    @extend %open_sans_small;
+                    @extend %minor_small;
                     margin-bottom: 15px;
                     line-height: 1.5rem;
 
                     span {
-                        @extend %open_sans_small;
+                        @extend %minor_small;
                         font-weight: 700;
                     }
                 }

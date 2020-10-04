@@ -1,5 +1,6 @@
-import React from "react";
-
+import React, { Fragment } from "react";
+import { connect } from "react-redux";
+import PropTypes from "prop-types";
 
 import {
   AiOutlineStar,
@@ -13,7 +14,7 @@ import deepImg from '../../svgs/deepImg.jpg'
 
 import "../styles/Recommendations.scss";
 
-const Recommendations = () => {
+const Recommendations = ({auth: { isAuthenticated, loading }}) => {
 
 // App Recs
   const apps = [
@@ -65,7 +66,8 @@ const Recommendations = () => {
       }
   ]
   return (
-    <div className="recommendations">
+      <Fragment >
+    {!loading & isAuthenticated ? <div className="recommendations">
       <div className="apps">
         <div className="title"><span>Tools</span> for <span>Success</span></div>
         <div className="apps_container">
@@ -106,8 +108,18 @@ const Recommendations = () => {
               })}
           </div>
       </div>
-    </div>
+    </div>: null}
+    </Fragment>
   );
 };
 
-export default Recommendations;
+
+Recommendations.propTypes = {
+    auth: PropTypes.object.isRequired,
+}
+
+const mapStateToProps = (state) => ({
+    auth: state.auth
+})
+
+export default connect(mapStateToProps, null)(Recommendations);

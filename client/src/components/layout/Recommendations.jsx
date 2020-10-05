@@ -47,6 +47,7 @@ const Recommendations = ({auth: { isAuthenticated, loading }}) => {
     },
   ];
   
+  // Book Recs
   const books = [
       {
         key: 1,
@@ -76,7 +77,7 @@ const Recommendations = ({auth: { isAuthenticated, loading }}) => {
               <a className="app_card" key={app.key} href={app.link} target='_blank'>
                 <div className="logo" style={{ backgroundColor: app.bg }}>
                   <IconContext.Provider value={{ className: "icon", style: {color: app.iconColor} }}>
-                    {app.logo}
+                    {app.logo}  
                   </IconContext.Provider>
                 </div>
                 <div className="content">

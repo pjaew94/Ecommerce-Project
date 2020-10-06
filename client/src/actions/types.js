@@ -10,3 +10,6 @@ export const LOGOUT = 'LOGOUT';
 export const GET_SUBJECT = 'GET_SUBJECT';
 export const GET_SUBJECTS = 'GET_SUBJECTS';
 export const SUBJECT_ERROR = 'SUBJECT_ERROR';
+export const GET_POSTS = 'GET_POSTS';
+export const REMOVE_POSTS = 'REMOVE_POSTS'
+export const POSTS_ERROR = 'POSTS_ERROR';

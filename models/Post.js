@@ -6,11 +6,11 @@ const PostSchema = new Schema({
     type: Schema.Types.ObjectId,
     ref: "users",
   },
-  title: {
-    type: String,
-    required: true,
+  subject: {
+    type: Schema.Types.String,
+    ref: "subjects"
   },
-  text: {
+  homework: {
     type: String,
     required: true,
   },
@@ -44,6 +44,10 @@ const PostSchema = new Schema({
       },
     },
   ],
+  due: {
+    type: String,
+    required: true
+  },
   date: {
     type: Date,
     default: Date.now,

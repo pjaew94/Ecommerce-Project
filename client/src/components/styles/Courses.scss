@@ -1,105 +1,173 @@
 @import "./config";
 
-.courses {
+.courses_container {
     @extend %center_flex;
     padding: 0% 2%;
     position: absolute;
-    width: 25vw;
-    height: 100%;
+    width: 50vw;
+    height: 100vh;
     left: 20vw;
 
-    .inner {
-        display: flex;
-        flex-direction: column;
-        height: 90vh;
-        width: 100%;
-        padding: 40px 30px;
-        border-radius: 20px;
-        background: #f9f9f8;
+    .courses {
+        @extend %center_flex;
+        padding: 0% 2%;
+        width: 50%;
+        height: 100%;
 
-        .course_card {
+        .inner {
             display: flex;
             flex-direction: column;
-            padding: 30px;
-            height: 270px;
+            height: 90vh;
             width: 100%;
-            background: white;
-            margin-bottom: 30px;
+            padding: 40px 30px;
             border-radius: 20px;
+            background: #f9f9f8;
 
-            .icon_button_container {
-                @extend %space_between_flex;
+            .course_card {
+                display: flex;
+                flex-direction: column;
+                padding: 30px;
+                height: 270px;
+                width: 100%;
+                background: white;
+                margin-bottom: 30px;
+                border-radius: 20px;
 
-                .icon_container {
-                    @extend %center_flex;
-                    border-radius: 50%;
-                    height: 50px;
-                    width: 50px;
-                    margin-bottom: 10px;
-                    .icon {
-                        font-size: 1.5rem;
+                .icon_button_container {
+                    @extend %space_between_flex;
+
+                    .icon_container {
+                        @extend %center_flex;
+                        border-radius: 50%;
+                        height: 50px;
+                        width: 50px;
+                        margin-bottom: 10px;
+                        .icon {
+                            font-size: 1.5rem;
+                        }
                     }
+
+                    .bookClub {
+                        background: #fddfdf;
+
+                        .icon {
+                            color: #ffb3b3;
+                        }
+                    }
+
+                    .english {
+                        background: #fdfae7;
+                        .icon {
+                            color: #fde259;
+                        }
+                    }
+
+                    .math {
+                        background: #eafceb;
+                        .icon {
+                            color: #8afc92;
+                        }
+                    }
+
+
+
+                        .course_button {
+                            position: relative;
+                            background: none;
+                            border: none;
+                            cursor: pointer;
+                            outline: none;
+                            
+
+                            .icon {
+                                font-size: 1.5rem;
+                                color: black;
+                                transition: 0.3s all ease-in;
+                            }
+
+                            h3 {
+                                position: absolute;
+                                top: 2px;
+                                left: -12px;
+                                z-index: 0;
+                                padding: 5px;
+                                background: $gray_text;
+                                border-radius: 10px;
+                                color: white;
+                                @extend %minor_small;
+                                transition: 0.3s all ease-in;
+                                transform: translateX(-25px);
+                                opacity: 0;
+                            }
+
+                            .current_icon {
+                                transform: translateX(25px);
+                                opacity: 0;
+                            }
+
+                            .current_text {
+                                transform: translateY(0);
+                                opacity: 1;
+                            }
+                        }
+                    
+                }
+                .instructor {
+                    @extend %minor_small;
+                    font-weight: 300;
+                    margin-bottom: 2px;
+                    color: $gray_text;
                 }
 
-                .bookClub {
-                    background: #fddfdf;
-
-                    .icon {
-                        color: #ffb3b3;
-                    }
+                .title {
+                    @extend %main_medium;
+                    font-size: 1.3rem;
                 }
 
-                .english {
-                    background: #fdfae7;
-                    .icon {
-                        color: #fde259;
-                    }
+                .time {
+                    @extend %minor_small;
+                    font-weight: 300;
+                    font-size: 0.7rem;
+                    color: $gray_text;
+                    margin-bottom: 5px;
                 }
 
-                .math {
-                    background: #eafceb;
-                    .icon {
-                        color: #8afc92;
-                    }
-                }
-
-                .course_button {
-                    .icon {
-                        font-size: 1.5rem;
-                        color: black; 
-                    }
+                .info {
+                    @extend %minor_small;
+                    font-weight: 300;
                 }
             }
-            .instructor {
+        }
+    }
+
+    .posts_container {
+        display: flex;
+        justify-content: center;
+        width: 50%;
+        height: 100%;
+        padding: 0% 2%;
+
+        .no_post_container {
+            display: flex;
+            align-items: center;
+            flex-direction: column;
+            margin-top: 21%;
+            width: 90%;
+            height: 270px;
+            border-radius: 20px;
+            padding: 5%;
+            @extend %box_shadow;
+
+            img {
+                width: 70%;
+                height: auto;
+                margin-bottom: 30px;
+            }
+
+            h1 {
                 @extend %minor_small;
-                font-weight: 300;
-                margin-bottom: 2px;
-                color: $gray_text;
+                font-size: 1rem;
             }
-
-            .title {
-                @extend %main_medium;
-                font-size: 1.3rem;
-                margin-bottom: 5px;
-            }
-
-            .info {
-                @extend %minor_small;
-                font-weight: 300;
-            }
-
-            // .button_container {
-            //     @extend %center_flex;
-            //     width: 100%;
-
-            //     .course_button {
-            //         @extend %center_flex;
-            //         height: 50px;
-            //         width: 100px;
-            //         border-radius: 20px;
-            //         background: pink;
-            //     }
-            // }
         }
     }
 }

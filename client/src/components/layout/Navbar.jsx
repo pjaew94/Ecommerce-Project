@@ -53,7 +53,7 @@ const Navbar = ({ logout, auth: { isAuthenticated, loading, user } }) => {
             <li>
               <Link
                 className={`link ${navState === 'courses' ? 'selected' : null}`}
-                to="/dashboard"
+                to="/courses"
                 name="courses"
                 onClick={setNav}
               >

@@ -1,0 +1,105 @@
+@import "./config";
+
+.courses {
+    @extend %center_flex;
+    padding: 0% 2%;
+    position: absolute;
+    width: 25vw;
+    height: 100%;
+    left: 20vw;
+
+    .inner {
+        display: flex;
+        flex-direction: column;
+        height: 90vh;
+        width: 100%;
+        padding: 40px 30px;
+        border-radius: 20px;
+        background: #f9f9f8;
+
+        .course_card {
+            display: flex;
+            flex-direction: column;
+            padding: 30px;
+            height: 270px;
+            width: 100%;
+            background: white;
+            margin-bottom: 30px;
+            border-radius: 20px;
+
+            .icon_button_container {
+                @extend %space_between_flex;
+
+                .icon_container {
+                    @extend %center_flex;
+                    border-radius: 50%;
+                    height: 50px;
+                    width: 50px;
+                    margin-bottom: 10px;
+                    .icon {
+                        font-size: 1.5rem;
+                    }
+                }
+
+                .bookClub {
+                    background: #fddfdf;
+
+                    .icon {
+                        color: #ffb3b3;
+                    }
+                }
+
+                .english {
+                    background: #fdfae7;
+                    .icon {
+                        color: #fde259;
+                    }
+                }
+
+                .math {
+                    background: #eafceb;
+                    .icon {
+                        color: #8afc92;
+                    }
+                }
+
+                .course_button {
+                    .icon {
+                        font-size: 1.5rem;
+                        color: black; 
+                    }
+                }
+            }
+            .instructor {
+                @extend %minor_small;
+                font-weight: 300;
+                margin-bottom: 2px;
+                color: $gray_text;
+            }
+
+            .title {
+                @extend %main_medium;
+                font-size: 1.3rem;
+                margin-bottom: 5px;
+            }
+
+            .info {
+                @extend %minor_small;
+                font-weight: 300;
+            }
+
+            // .button_container {
+            //     @extend %center_flex;
+            //     width: 100%;
+
+            //     .course_button {
+            //         @extend %center_flex;
+            //         height: 50px;
+            //         width: 100px;
+            //         border-radius: 20px;
+            //         background: pink;
+            //     }
+            // }
+        }
+    }
+}

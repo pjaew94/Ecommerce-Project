@@ -10,7 +10,7 @@ import { BsArrowRight } from "react-icons/bs";
 import { IconContext } from "react-icons";
 
 import "../styles/Courses.scss";
-import coffeeGif from '../../svgs/coffee.gif'
+import coffeeGif from "../../svgs/coffee.gif";
 
 import Posts from "./Posts";
 
@@ -25,12 +25,12 @@ const Courses = ({
   useEffect(() => {
     getAllSubjects(user);
 
-    return function cleanup () {
-      removeSubjectPosts()
-    }
+    return function cleanup() {
+      removeSubjectPosts();
+    };
   }, []);
 
-  const [currentSubject, setCurrentSubject] = useState('')
+  const [currentSubject, setCurrentSubject] = useState("");
 
   // Create new array of subjects to display
   let coursesSubjects = [];
@@ -56,18 +56,18 @@ const Courses = ({
   };
 
   const noPost = (
-    <div className='no_post_container'>
-      <img src={coffeeGif} alt='Coffee Guy'></img>
+    <div className="no_post_container">
+      <img src={coffeeGif} alt="Coffee Guy"></img>
       <h1>Select one of the subjects to see the contents!</h1>
     </div>
-  )
+  );
 
   const callPost = (subjectId) => {
-    getSubjectPosts(subjectId)
-    setCurrentSubject(subjectId)
-  }
+    getSubjectPosts(subjectId);
+    setCurrentSubject(subjectId);
+  };
 
-  return loading && subjects === null ? (
+  return loading && subjects === null && posts === null ? (
     <Spinner />
   ) : (
     <div className="courses_container">
@@ -83,13 +83,32 @@ const Courses = ({
                         {getIcon(s.instructorSubjects)}
                       </IconContext.Provider>
                     </div>
-                    <div className='button_container'>
-                    <button className={"course_button"} onClick={() => callPost(s.subjectId)}>
-                      <IconContext.Provider value={{ className: `icon ${currentSubject === s.subjectId ? 'current_icon' : null}` }}>
-                        <BsArrowRight />
-                      </IconContext.Provider>
-                      <h3 className={currentSubject === s.subjectId ? 'current_text' : null}>Current</h3>
-                    </button>
+                    <div className="button_container">
+                      <button
+                        className={"course_button"}
+                        onClick={() => callPost(s.subjectId)}
+                      >
+                        <IconContext.Provider
+                          value={{
+                            className: `icon ${
+                              currentSubject === s.subjectId
+                                ? "current_icon"
+                                : null
+                            }`,
+                          }}
+                        >
+                          <BsArrowRight />
+                        </IconContext.Provider>
+                        <h3
+                          className={
+                            currentSubject === s.subjectId
+                              ? "current_text"
+                              : null
+                          }
+                        >
+                          Current
+                        </h3>
+                      </button>
                     </div>
                   </div>
                   <h3 className="instructor">
@@ -107,20 +126,26 @@ const Courses = ({
       </div>
 
       <div className="posts_container">
-        {posts ?
-          posts.map((post) => {
-            return (
-              <Posts
-                name={post.name}
-                homework={post.homework}
-                due={post.due}
-                date={post.date}
-                likes={post.likes}
-                comments={post.comments}
-                key={post._id}
-              />
-            );
-          }) : noPost}
+        <div className="inner">
+          {posts
+            ? posts.map((post) => {
+                return (
+                  <Posts
+                    postId={post._id}
+                    name={post.name}
+                    homework={post.homework}
+                    due={post.due}
+                    date={post.date}
+                    likes={post.likes}
+                    comments={post.comments}
+                    key={post._id}
+                    userId={user._id}
+                    subject={currentSubject}
+                  />
+                );
+              })
+            : noPost}
+        </div>
       </div>
     </div>
   );
@@ -140,6 +165,8 @@ const mapStateToProps = (state) => ({
   posts: state.posts,
 });
 
-export default connect(mapStateToProps, { getAllSubjects, getSubjectPosts, removeSubjectPosts })(
-  Courses
-);
+export default connect(mapStateToProps, {
+  getAllSubjects,
+  getSubjectPosts,
+  removeSubjectPosts,
+})(Courses);

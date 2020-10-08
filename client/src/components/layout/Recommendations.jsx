@@ -74,7 +74,7 @@ const Recommendations = ({auth: { isAuthenticated, loading }}) => {
         <div className="apps_container">
           {apps.map((app) => {
             return (
-              <a className="app_card" key={app.key} href={app.link} target='_blank'>
+              <a className="app_card" key={app.key} href={app.link} target='_blank' rel='noopener noreferrer'>
                 <div className="logo" style={{ backgroundColor: app.bg }}>
                   <IconContext.Provider value={{ className: "icon", style: {color: app.iconColor} }}>
                     {app.logo}  
@@ -98,7 +98,7 @@ const Recommendations = ({auth: { isAuthenticated, loading }}) => {
           <div className='books_container'>
               {books.map((book) => {
                   return (
-                      <a className='book_card' key={book.key} href={book.link} target='_blank'>
+                      <a className='book_card' key={book.key} href={book.link} target='_blank' rel='noopener noreferrer'>
                           <div className='content'>
                             <h2>{book.title} <span>- {book.author}</span></h2>
                             <h3>{book.des}</h3>

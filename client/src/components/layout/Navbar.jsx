@@ -104,7 +104,7 @@ const Navbar = ({ logout, auth: { isAuthenticated, loading, user } }) => {
               </a>
             </div>
             <div className="user_block">
-              <img src={courage} alt="profile picture"></img>
+              <img src={courage} alt="prof pic"></img>
               <div className="user_info">
                 {user && user.name}
                 <span>{user && user.status}</span>

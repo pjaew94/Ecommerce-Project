@@ -1,5 +1,8 @@
 const mongoose = require("mongoose");
+const { DateTime } = require('luxon');
 const Schema = mongoose.Schema;
+
+var dt = DateTime.local()
 
 const PostSchema = new Schema({
   user: {
@@ -39,18 +42,18 @@ const PostSchema = new Schema({
         type: String,
       },
       date: {
-        type: Date,
-        default: Date.now,
+        type: String,
+        default: dt.toLocaleString()
       },
     },
   ],
   due: {
     type: String,
-    required: true
+    required: true,
   },
   date: {
-    type: Date,
-    default: Date.now,
+    type: String,
+    default: dt.toLocaleString()
   },
 });
 

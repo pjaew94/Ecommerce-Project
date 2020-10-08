@@ -1,0 +1,139 @@
+@import "./config";
+
+.post_container {
+    display: flex;
+    flex-direction: column;
+    height: auto;
+    width: 100%;
+    margin-bottom: 30px;
+
+    .post {
+        @extend %space_between_flex;
+        height: 70px;
+        width: 100%;
+        border-left: 3px solid #cc5737;
+        padding: 2px 10px;
+
+
+        .left,
+        .right {
+            display: flex;
+            justify-content: space-between;
+            flex-direction: column;
+            height: 100%;
+            
+
+            h3 {
+                @extend %minor_small;
+                font-size: 0.8rem;
+            }
+        }
+
+        .left{
+            width: 70%;
+
+            h3 {
+                font-weight: 300;
+                span {
+                    @extend %minor_small;
+                    font-size: 0.8rem;
+                    font-weight: 700;
+                }
+            }
+        }
+
+        .right {
+            width: 30%;
+             
+            .by {
+                display: flex;
+                flex-direction: column;
+                align-items: flex-end;
+                h3 {
+                    color: $gray_text;
+                    font-size: 0.7rem;
+                }
+            }
+
+            .dopamine {
+                @extend %space_between_flex;
+
+                .button_container {
+                    @extend %center_flex;
+                    
+
+                    h4 {
+                        @extend %center_flex;
+                        @extend %minor_small;
+                        font-size: 0.6rem;
+                        background: $gray_text;
+                        height: 15px;
+                        width: 15px;
+                        border-radius: 50%;
+                        color: white;
+                        transform: translate(-10px, -10px);
+                    }
+                }
+
+                button {
+                    padding: 5px 5px 0 5px;
+                    @extend %center_flex;
+                    background: none;
+                    outline: none;
+                    border: none;
+                    cursor: pointer;
+
+                    .liked {
+                        color: #FF6961;
+                        font-size: 1.3rem;
+                    }
+
+                    .no_like {
+                        font-size: 1.3rem;
+                    }
+                }
+            }
+        }
+    }
+
+    .comments {
+        display: flex;
+        flex-direction: column;
+        height: auto;
+        width: 100%;
+        padding-left: 30px;
+
+        .comment {
+            display: flex;
+            justify-content: space-between;
+            border-left: 3px solid #ebbcaf;
+            height: 50px;
+            width: 100%;
+            padding: 2px 10px;
+            margin-top: 20px;
+
+            h3 {
+                @extend %minor_small;
+                font-size: 0.8rem;
+                font-weight: 300;
+                width: 70%;
+            }
+
+            .by {
+                display: flex;
+                flex-direction: column;
+                align-items: flex-end;
+                width: 30%;
+
+                h4 {
+                    @extend %minor_small;
+                    font-size: 0.7rem;
+                    font-weight: 300;
+                    color: $gray_text;
+
+                }
+            }
+        }
+        
+    }
+}

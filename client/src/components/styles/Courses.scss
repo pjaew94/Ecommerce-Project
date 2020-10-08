@@ -56,61 +56,57 @@
                     }
 
                     .english {
-                        background: #fdfae7;
+                        background:#F6CEC6;
                         .icon {
-                            color: #fde259;
+                            color: #DF5E44;
                         }
                     }
 
                     .math {
-                        background: #eafceb;
+                        background: #dfeae9;
                         .icon {
-                            color: #8afc92;
+                            color: #83aea7;
                         }
                     }
 
+                    .course_button {
+                        position: relative;
+                        background: none;
+                        border: none;
+                        cursor: pointer;
+                        outline: none;
 
-
-                        .course_button {
-                            position: relative;
-                            background: none;
-                            border: none;
-                            cursor: pointer;
-                            outline: none;
-                            
-
-                            .icon {
-                                font-size: 1.5rem;
-                                color: black;
-                                transition: 0.3s all ease-in;
-                            }
-
-                            h3 {
-                                position: absolute;
-                                top: 2px;
-                                left: -12px;
-                                z-index: 0;
-                                padding: 5px;
-                                background: $gray_text;
-                                border-radius: 10px;
-                                color: white;
-                                @extend %minor_small;
-                                transition: 0.3s all ease-in;
-                                transform: translateX(-25px);
-                                opacity: 0;
-                            }
-
-                            .current_icon {
-                                transform: translateX(25px);
-                                opacity: 0;
-                            }
-
-                            .current_text {
-                                transform: translateY(0);
-                                opacity: 1;
-                            }
+                        .icon {
+                            font-size: 1.5rem;
+                            color: black;
+                            transition: 0.3s all ease-in;
                         }
-                    
+
+                        h3 {
+                            position: absolute;
+                            top: 2px;
+                            left: -12px;
+                            z-index: 0;
+                            padding: 5px;
+                            background: $gray_text;
+                            border-radius: 10px;
+                            color: white;
+                            @extend %minor_small;
+                            transition: 0.3s all ease-in;
+                            transform: translateX(-25px);
+                            opacity: 0;
+                        }
+
+                        .current_icon {
+                            transform: translateX(25px);
+                            opacity: 0;
+                        }
+
+                        .current_text {
+                            transform: translateY(0);
+                            opacity: 1;
+                        }
+                    }
                 }
                 .instructor {
                     @extend %minor_small;
@@ -141,32 +137,40 @@
     }
 
     .posts_container {
-        display: flex;
-        justify-content: center;
+        @extend %center_flex;
+        padding: 0% 2%;
         width: 50%;
         height: 100%;
-        padding: 0% 2%;
+        // overflow-y: scroll;
 
-        .no_post_container {
+        .inner {
             display: flex;
-            align-items: center;
             flex-direction: column;
-            margin-top: 21%;
-            width: 90%;
-            height: 270px;
+            height: 90vh;
+            width: 100%;
+            padding: 40px 15px;
             border-radius: 20px;
-            padding: 5%;
-            @extend %box_shadow;
 
-            img {
-                width: 70%;
-                height: auto;
-                margin-bottom: 30px;
-            }
+            .no_post_container {
+                display: flex;
+                align-items: center;
+                flex-direction: column;
+                width: 100%;
+                height: 270px;
+                border-radius: 20px;
+                padding: 5%;
+                @extend %box_shadow;
 
-            h1 {
-                @extend %minor_small;
-                font-size: 1rem;
+                img {
+                    width: 70%;
+                    height: auto;
+                    margin-bottom: 30px;
+                }
+
+                h1 {
+                    @extend %minor_small;
+                    font-size: 0.9rem;
+                }
             }
         }
     }

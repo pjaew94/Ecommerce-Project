@@ -1,0 +1,49 @@
+@import "./config";
+
+.post_form_container {
+    display: flex;
+    justify-content: flex-start;
+    align-items: flex-start;
+    flex-direction: column;
+    height: auto;
+    width: 100%;
+    transform: translateY(-30px);
+
+    .title {
+        @extend %space_between_flex;
+        width: 65%;
+        margin-bottom: 15px;
+
+        h1 {
+            @extend %main_medium;
+        }
+
+        .add_icon {
+            @extend %center_flex;
+            height: 35px;
+            width: 35px;
+            transition: 0.2s all ease-in;
+            border-radius: 10px;
+            cursor: pointer;
+
+            &:hover {
+                background: #cc5737;
+                color: white;
+            }
+
+            .icon {
+                font-size: 1.4rem;
+            }
+
+        }
+    }
+
+
+    .form {
+        height: 180px;
+        width: 100%;
+        background: #cc5737;
+        border-radius: 20px;
+        
+    }
+}

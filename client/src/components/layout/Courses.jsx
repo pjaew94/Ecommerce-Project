@@ -12,13 +12,14 @@ import { IconContext } from "react-icons";
 import "../styles/Courses.scss";
 import coffeeGif from "../../svgs/coffee.gif";
 
-import Posts from "./Posts";
+import Posts from "./Posts/Posts";
+import PostForm from './Posts/PostForm'
 
 const Courses = ({
   getAllSubjects,
   getSubjectPosts,
   removeSubjectPosts,
-  posts: { posts },
+  posts,
   auth: { user },
   subjects: { subjects, loading },
 }) => {
@@ -54,6 +55,8 @@ const Courses = ({
       return <BiCalculator />;
     }
   };
+
+  const subjectPosts = posts.posts
 
   const noPost = (
     <div className="no_post_container">
@@ -127,8 +130,13 @@ const Courses = ({
 
       <div className="posts_container">
         <div className="inner">
-          {posts
-            ? posts.map((post) => {
+          {subjectPosts && <PostForm 
+          subjectId={posts.subject}
+          />}
+          {subjectPosts
+            ? 
+            
+            subjectPosts.map((post) => {
                 return (
                   <Posts
                     postId={post._id}

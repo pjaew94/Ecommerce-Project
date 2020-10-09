@@ -10,8 +10,8 @@ const PostSchema = new Schema({
     ref: "users",
   },
   subject: {
-    type: Schema.Types.String,
-    ref: "subjects"
+    type: String,
+    required: true
   },
   homework: {
     type: String,

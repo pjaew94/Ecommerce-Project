@@ -11,6 +11,8 @@ export const getSubjectPosts = (subject) => async dispatch => {
       dispatch({
         type: GET_POSTS,
         payload: res.data,
+        subjectId: subject
+
       });
     
   } catch (err) {
@@ -158,10 +160,13 @@ export const deletePost = id => async dispatch => {
     try {
       await axios.delete(`/api/posts/comment/${postId}/${commentId}`);
 
+      const posts = await axios.get(`/api/posts/${subject}`);
+
       dispatch({
         type: REMOVE_COMMENT,
         payload: commentId,
-        id: postId
+        id: postId,
+        updatedPosts: posts.data
       });
 
 

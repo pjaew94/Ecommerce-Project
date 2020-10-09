@@ -1,14 +1,16 @@
 import React, { useState, useEffect } from "react";
 import PropTypes from "prop-types";
 import { connect } from "react-redux";
-import { addLike, removeLike, addComment, removeComment } from "../../actions/posts";
+import { addLike, removeLike, addComment, removeComment } from "../../../actions/posts";
 
 
 import { HiHeart, HiOutlineHeart, HiOutlinePlus } from "react-icons/hi";
 import { BiComment } from "react-icons/bi";
 import { IconContext } from "react-icons";
 
-import "../styles/Posts.scss";
+import Comment from './Comment';
+import "../../styles/Posts.scss";
+
 
 const Posts = ({ postId, name, homework, due, date, likes, comments, userId, subject, addLike, removeLike, addComment, removeComment }) => {
 
@@ -40,21 +42,7 @@ const likePost = () => {
 
 
 
-// Comments that gets toggled
-  const theComments = (
-    <div className="comments">
-      {comments &&
-        comments.map((comment) => {
-          return <div className="comment" key={comment._id} onClick={() => test(comment._id)}>
-              <h3>{comment.text}</h3>
-              <div className='by'>
-                  <h4>{comment.name}</h4>
-                  <h4>{comment.date}</h4>
-              </div>
-          </div>;
-        })}
-    </div>
-  );
+
 
   const test = (id) => {
     removeComment(postId, id, subject)
@@ -105,7 +93,17 @@ const likePost = () => {
           </div>
         </div>
       </div>
-      {showComments === true ? theComments : null}
+      <div className='comments'>
+      {showComments === true ? 
+      comments.map((comment) => {
+        return <Comment 
+            key={comment._id}
+            name={comment.name}
+            text={comment.text}
+            date={comment.date}
+        />
+      }) : null}
+      </div>
     </div>
   );
 };

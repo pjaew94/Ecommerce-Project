@@ -10,18 +10,20 @@ import {
 } from "../actions/types.js";
 
 const initialState = {
+  subject: null,
   posts: null,
   loading: true,
   error: {},
 };
 
 export default function (state = initialState, actions) {
-  const { type, payload, id } = actions;
+  const { type, payload, id, updatedPosts, subjectId } = actions;
 
   switch (type) {
     case GET_POSTS:
       return {
         ...state,
+        subject: subjectId,
         posts: payload,
         loading: false,
       };
@@ -57,26 +59,25 @@ export default function (state = initialState, actions) {
         loading: false,
       };
     case ADD_COMMENT:
+        state.posts.map((post) => {
+            if (post._id === id) {
+              return { ...state.post, comments: payload };
+            }
+          })
       return {
         ...state,
-        posts: state.posts.map((post) => {
-          if (post._id === id) {
-            return { ...state.post, comments: payload };
-          }
-          return {...state}
-        }),
+        posts: updatedPosts,
         loading: false,
       };
     case REMOVE_COMMENT:
+        state.posts.map((post) => {
+            if (post._id === id) {
+              post.comments.filter((comment) => comment._id !== payload);
+            }
+        })
       return {
         ...state,
-        posts: state.posts.map((post) => {
-          if (post._id === id) {
-            post.comments.filter((comment) => comment._id !== payload);
-          }
-          return{...state}
-        }),
-
+        posts: updatedPosts,
         loading: false,
       };
 

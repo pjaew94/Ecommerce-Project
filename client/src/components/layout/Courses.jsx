@@ -140,6 +140,7 @@ const Courses = ({
                 return (
                   <Posts
                     postId={post._id}
+                    postUserId={post.user}
                     name={post.name}
                     homework={post.homework}
                     due={post.due}
@@ -149,6 +150,7 @@ const Courses = ({
                     key={post._id}
                     userId={user._id}
                     subject={currentSubject}
+                    userStatus={user.status}
                   />
                 );
               })

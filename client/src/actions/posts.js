@@ -8,6 +8,8 @@ export const getSubjectPosts = (subject) => async dispatch => {
 
       const res = await axios.get(`/api/posts/${subject}`);
 
+      
+
       dispatch({
         type: GET_POSTS,
         payload: res.data,

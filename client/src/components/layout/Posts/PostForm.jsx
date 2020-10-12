@@ -32,9 +32,11 @@ const PostForm = ({ subjectId, name, addPost }) => {
     e.preventDefault();
     addPost(formData);
     toggleForm();
+    setFormData({ subject: null })
   };
 
   const toggleForm = () => {
+    setFormData({ subject: subjectId})
     setShowForm(!showForm);
     console.log(subjectId)
   };

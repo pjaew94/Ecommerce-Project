@@ -39,6 +39,7 @@ router.post(
       });
 
       const post = await newPost.save();
+      
 
       res.json(post);
     } catch (err) {

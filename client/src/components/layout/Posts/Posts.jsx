@@ -19,9 +19,8 @@ import { BiComment } from "react-icons/bi";
 import { IconContext } from "react-icons";
 
 import Comment from "./Comment";
-import CommentForm from './CommentForm'
+import CommentForm from "./CommentForm";
 import "../../styles/Posts.scss";
-import { post } from "request";
 
 const Posts = ({
   postId,
@@ -74,9 +73,9 @@ const Posts = ({
   };
 
   const displayCommentForm = () => {
-    setShowCommentForm(!showCommentForm)
-    setShowComments(true)
-  }
+    setShowCommentForm(!showCommentForm);
+    setShowComments(true);
+  };
 
   const deleteEdit = (
     <div className={`delete_edit ${showEdit && "slide_delete_edit"}`}>
@@ -93,16 +92,14 @@ const Posts = ({
     </div>
   );
 
-
-
   return (
-    <div className="post_container">
+    <div
+      className="post_container"
+      onMouseEnter={() => checkAndShowEdit()}
+      onMouseLeave={() => setShowEdit(false)}
+    >
       {showEdit && deleteEdit}
-      <div
-        className={`post ${showEdit && "slide_post"}`}
-        onMouseEnter={() => checkAndShowEdit()}
-        onMouseLeave={() => setShowEdit(false)}
-      >
+      <div className="post">
         <div className="left">
           <h3 className="homework">
             <span>Homework:</span> {homework}
@@ -138,10 +135,7 @@ const Posts = ({
               </button>
               <h4 className="comments_count">{comments && comments.length}</h4>
             </div>
-            <button
-              className="add_button"
-              onClick={() => displayCommentForm()}
-            >
+            <button className="add_button" onClick={() => displayCommentForm()}>
               <IconContext.Provider value={{ className: "icon" }}>
                 <HiOutlinePlus />
               </IconContext.Provider>
@@ -149,7 +143,7 @@ const Posts = ({
           </div>
         </div>
       </div>
-      {showCommentForm && <CommentForm postId={postId} subject={subject}/>}
+      {showCommentForm && <CommentForm postId={postId} subject={subject} />}
       <div className="comments">
         {showComments === true
           ? comments.map((comment) => {

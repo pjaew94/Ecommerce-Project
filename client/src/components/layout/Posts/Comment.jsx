@@ -31,7 +31,6 @@ const Comment = ({
       userStatus === "Admin"
     ) {
       setShowEdit(!showEdit);
-      console.log(showEdit);
     }
   };
 

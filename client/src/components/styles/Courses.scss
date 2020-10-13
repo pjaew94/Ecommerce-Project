@@ -141,7 +141,23 @@
         padding: 0% 2%;
         width: 50%;
         height: 100%;
-        // overflow-y: scroll;
+        overflow-y: overlay;
+
+        &::-webkit-scrollbar  {
+            width: 2px;
+        
+        }
+
+        &::-webkit-scrollbar-thumb {
+            background-color: rgb(194, 194, 194);
+            border-radius: 10px;
+            outline: none;
+        }
+
+        &::-webkit-scrollbar-track {
+            margin: 100px 0;
+
+        }
 
         .inner {
             display: flex;

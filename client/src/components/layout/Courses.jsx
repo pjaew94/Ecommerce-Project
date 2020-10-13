@@ -15,6 +15,7 @@ import coffeeGif from "../../svgs/coffee.gif";
 import Posts from "./Posts/Posts";
 import PostForm from "./Posts/PostForm";
 
+
 const Courses = ({
   getAllSubjects,
   getSubjectPosts,
@@ -50,7 +51,7 @@ const subjectPosts = posts.posts;
 let arrangedSubjects = [];
   if (subjectPosts) {
     arrangedSubjects = subjectPosts.sort(function (x, y) {
-      return y.dateSeconds.replace(/-/g, "") - x.dateSeconds.replace(/-/g, "");
+      return y.due.replace(/-/g, "") - x.due.replace(/-/g, "");
     });
   }
   
@@ -75,6 +76,12 @@ let arrangedSubjects = [];
     getSubjectPosts(subjectId);
     setCurrentSubject(subjectId);
   };
+
+// check if user is instructor or admin to show postForm
+let postForm = null;
+if(user) {
+  postForm = user.status === "Instructor" || user.status === "Admin" ? <PostForm subjectId={posts.subject}  /> : null
+}
 
  
 
@@ -137,8 +144,9 @@ let arrangedSubjects = [];
       </div>
 
       <div className="posts_container">
+
         <div className="inner">
-          {subjectPosts && <PostForm subjectId={posts.subject} />}
+          {subjectPosts && postForm}
           {arrangedSubjects.length > 0
             ? arrangedSubjects.map((post) => {
                 return (
@@ -160,7 +168,9 @@ let arrangedSubjects = [];
               })
             : noPost}
         </div>
+
       </div>
+  
     </div>
   );
 };

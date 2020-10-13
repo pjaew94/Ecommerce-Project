@@ -13,7 +13,7 @@ import "../styles/Courses.scss";
 import coffeeGif from "../../svgs/coffee.gif";
 
 import Posts from "./Posts/Posts";
-import PostForm from './Posts/PostForm'
+import PostForm from "./Posts/PostForm";
 
 const Courses = ({
   getAllSubjects,
@@ -35,7 +35,6 @@ const Courses = ({
 
   // Create new array of subjects to display
   let coursesSubjects = [];
-
   if (subjects && !loading && user) {
     coursesSubjects = subjects.filter(function (e) {
       if (user.status === "Admin" || user.status === "Instructor") {
@@ -46,6 +45,15 @@ const Courses = ({
     });
   }
 
+  // Pulls out the posts and sorts by date. --- Quality: Get exact seconds when updated and sort by seconds instead of date.
+const subjectPosts = posts.posts;
+let arrangedSubjects = [];
+  if (subjectPosts) {
+    arrangedSubjects = subjectPosts.sort(function (x, y) {
+      return y.dateSeconds.replace(/-/g, "") - x.dateSeconds.replace(/-/g, "");
+    });
+  }
+  
   const getIcon = (subject) => {
     if (subject === "bookClub") {
       return <BiBookHeart />;
@@ -55,8 +63,6 @@ const Courses = ({
       return <BiCalculator />;
     }
   };
-
-  const subjectPosts = posts.posts
 
   const noPost = (
     <div className="no_post_container">
@@ -69,6 +75,8 @@ const Courses = ({
     getSubjectPosts(subjectId);
     setCurrentSubject(subjectId);
   };
+
+ 
 
   return loading && subjects === null && posts === null ? (
     <Spinner />
@@ -130,13 +138,9 @@ const Courses = ({
 
       <div className="posts_container">
         <div className="inner">
-          {subjectPosts && <PostForm 
-          subjectId={posts.subject}
-          />}
-          {subjectPosts
-            ? 
-            
-            subjectPosts.map((post) => {
+          {subjectPosts && <PostForm subjectId={posts.subject} />}
+          {arrangedSubjects.length > 0
+            ? arrangedSubjects.map((post) => {
                 return (
                   <Posts
                     postId={post._id}
@@ -165,6 +169,7 @@ Courses.propTypes = {
   getAllSubjects: PropTypes.func.isRequired,
   getSubjectPosts: PropTypes.func.isRequired,
   removeSubjectPosts: PropTypes.func.isRequired,
+
   auth: PropTypes.object.isRequired,
   subjects: PropTypes.object.isRequired,
 };

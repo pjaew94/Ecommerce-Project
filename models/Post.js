@@ -55,6 +55,10 @@ const PostSchema = new Schema({
     type: String,
     default: dt.toLocaleString()
   },
+  dateSeconds: {
+    type: String,
+    default: dt.toISODate()
+  }
 });
 
 module.exports = Post = mongoose.model('post', PostSchema);

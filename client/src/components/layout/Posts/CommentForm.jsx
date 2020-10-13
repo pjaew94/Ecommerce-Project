@@ -1,23 +1,47 @@
-import React, { useState } from "react";
-import { connect } from "react-redux";
-
+import React, { useState, useEffect } from "react";
 import PropTypes from "prop-types";
-import { DateTime } from "luxon";
-
-import "../../styles/CommentForm.scss";
+import { connect } from "react-redux";
 import { addComment } from "../../../actions/posts";
 
-import { HiOutlinePlus } from "react-icons/hi";
-import { IconContext } from "react-icons";
 
-const CommentForm = ({ addComment }) => {
-    return <div className='comment_form'>
+import '../../styles/CommentForm.scss'
 
-    </div>
+const CommentForm = ({ addComment, subject, postId }) => {
+
+   const [formData, setFormData] = useState({
+    text: ''
+})
+
+const { text } = formData
+
+const onChange = (e) =>
+setFormData({ ...formData, [e.target.name]: e.target.value });
+
+const onSubmit = (e) => {
+    e.preventDefault()
+    addComment(postId, formData, subject);
+
 }
+
+    return (
+        <form className='comment_form' onSubmit={onSubmit}>
+        <textarea 
+            type='text'
+            name='text'
+            value={text}
+            placeholder='Add comment...'
+            onChange={onChange}
+        />
+        <div className='button_container'>
+            <input type='submit' className='button' value='Comment' />
+        </div>
+    </form>
+    )
+}
+
 
 CommentForm.propTypes = {
     addComment: PropTypes.func.isRequired,
 }
 
-export default connect(null, { addComment })(CommentForm);
+export default connect(null, { addComment })(CommentForm)

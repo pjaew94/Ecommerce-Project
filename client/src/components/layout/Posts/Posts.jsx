@@ -5,7 +5,7 @@ import {
   addLike,
   removeLike,
   addComment,
-  deletePost
+  deletePost,
 } from "../../../actions/posts";
 
 import {
@@ -38,7 +38,7 @@ const Posts = ({
   addLike,
   removeLike,
   addComment,
-  deletePost
+  deletePost,
 }) => {
   const [showComments, setShowComments] = useState(false);
   const [like, setLike] = useState(false);
@@ -66,23 +66,26 @@ const Posts = ({
     }
   };
 
-
-
   // Check if user for delete to come up
   const checkAndShowEdit = () => {
-    if(userId === postUserId){
-      setShowEdit(true)
+    if (userId === postUserId) {
+      setShowEdit(true);
     }
+  };
+
+  const displayCommentForm = () => {
+    setShowCommentForm(!showCommentForm)
+    setShowComments(true)
   }
 
   const deleteEdit = (
-    <div className={`delete_edit ${showEdit && 'slide_delete_edit'}`}>
-      <div className="edit_container" >
+    <div className={`delete_edit ${showEdit && "slide_delete_edit"}`}>
+      <div className="edit_container">
         <IconContext.Provider value={{ className: "icon" }}>
           <FiEdit3 />
         </IconContext.Provider>
       </div>
-      <div className="delete_container" onClick={()=> deletePost(postId)}>
+      <div className="delete_container" onClick={() => deletePost(postId)}>
         <IconContext.Provider value={{ className: "icon" }}>
           <HiOutlineTrash />
         </IconContext.Provider>
@@ -90,14 +93,16 @@ const Posts = ({
     </div>
   );
 
+
+
   return (
-    <div
-      className="post_container"
-      onMouseEnter={() => checkAndShowEdit()}
-      onMouseLeave={() => setShowEdit(false)}
-    >
+    <div className="post_container">
       {showEdit && deleteEdit}
-      <div className={`post ${showEdit && 'slide_post'}`}>
+      <div
+        className={`post ${showEdit && "slide_post"}`}
+        onMouseEnter={() => checkAndShowEdit()}
+        onMouseLeave={() => setShowEdit(false)}
+      >
         <div className="left">
           <h3 className="homework">
             <span>Homework:</span> {homework}
@@ -133,7 +138,10 @@ const Posts = ({
               </button>
               <h4 className="comments_count">{comments && comments.length}</h4>
             </div>
-            <button className="add_button" onClick={() => setShowCommentForm(!showCommentForm)}>
+            <button
+              className="add_button"
+              onClick={() => displayCommentForm()}
+            >
               <IconContext.Provider value={{ className: "icon" }}>
                 <HiOutlinePlus />
               </IconContext.Provider>
@@ -141,7 +149,7 @@ const Posts = ({
           </div>
         </div>
       </div>
-      {showCommentForm && <CommentForm />}
+      {showCommentForm && <CommentForm postId={postId} subject={subject}/>}
       <div className="comments">
         {showComments === true
           ? comments.map((comment) => {
@@ -182,5 +190,5 @@ export default connect(mapStateToProps, {
   addLike,
   removeLike,
   addComment,
-  deletePost
+  deletePost,
 })(Posts);

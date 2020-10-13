@@ -2,7 +2,6 @@ import React, { useState } from "react";
 import { connect } from "react-redux";
 
 import PropTypes from "prop-types";
-import { DateTime } from "luxon";
 
 import "../../styles/PostForm.scss";
 import { addPost } from "../../../actions/posts";
@@ -11,13 +10,12 @@ import { HiOutlinePlus } from "react-icons/hi";
 import { IconContext } from "react-icons";
 
 const PostForm = ({ subjectId, name, addPost }) => {
-  const dt = DateTime.local();
+
 
   const [formData, setFormData] = useState({
     homework: "",
     due: "",
     subject: subjectId,
-    date: dt.toLocaleString(),
     name: name,
   });
 

@@ -147,7 +147,7 @@ const Register = ({
   // Conditions to load register page
   if (!loading && user !== null) {
     if (user.status !== "Admin" && isAuthenticated) {
-      return <Redirect to="/dashboard" />;
+      return <Redirect to="/courses" />;
     } else if (!isAuthenticated) {
       return <Redirect to="/login" />;
     }
